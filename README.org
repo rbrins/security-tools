@@ -1,0 +1,20 @@
+#+TITLE: Red Teaming and Pentesting Custom Tooling
+#+AUTHOR: Russell Brinson
+#+DATE: 2022-11-23
+#+OPTIONS: tasks:nil
+
+* Ovierview
+Customer tooling and automations to aid in pentesting & red teaming engagements. Some are built for ctfs and cert exames but will stay here for reference.
+
+* Networking Scanning
+- [[file:./quick-discovery.sh][quick-discovery.sh]] - A simple wrapper around nmap and arp to quick report and scan up host, better tools exist for most purposes, this is just simple a simple light start to a pentest not worried about detection
+
+
+* Tool Creation
+- [[file:./debugger-wrappers.py][debugger-wrappers.py]] - Import this python script into your python module to provide two functions for helping you debug, especially if you are terminal only and don't have an ide around
+
+* Passwords, Hashes, and Cracking
+- [[file:./auto-hash.sh][auto-hash.sh]] - A simple wrapper around hashid and hashcat to automatically detect the hashid and start bruteforcing with rockyou, probably should add a one rule flag
+
+* Licensing
+- Any custom code solely by me is GPL v3 or later
