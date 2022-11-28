@@ -17,7 +17,7 @@ cat $1 | while read line
 do
     FOUND=$( echo $line | grep -e $REGEX )
 
-    if [ ! -z $FOUND ]
+    if [ ! -z "$FOUND" ]
     then
 	echo "$FOUND" >> $TMPFILELOC
     fi
