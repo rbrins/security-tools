@@ -4,8 +4,10 @@
 
 # Default values and debugging info
 FILEEXT=${2:-".js"}
-echo "Log Location:     $1"
-echo "Default File ext: $FILEEXT"
+TMPFILELOC=${3:-"/tmp/extractingdump.txt"}
+echo "Log Location:            $1"
+echo "Default File ext:        $FILEEXT"
+echo "Temporary File Location: $TMPFILELOC"
 
 # with line anchors ^ and $ (escaped with \) 
 # Just looking at file that start with forward slash (may need to add or other special characters)
@@ -17,9 +19,10 @@ do
 
     if [ ! -z $FOUND ]
     then
-	echo "$FOUND" >> /tmp/extract-tmp.txt
+	echo "$FOUND" >> $TMPFILELOC
     fi
 done
 
 # Make this tmp file a variable with default tmp
-sort -u /tmp/extract-tmp.txt
+sort -u $TMPFILELOC
+rm $TMPFILELOC
