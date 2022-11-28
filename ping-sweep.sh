@@ -7,7 +7,7 @@ echo "Ending value last Octet:         $3"
 
 for i in $(seq $2 $3)
 do
-    IPADDR="$1" + "." + "$i"
+    IPADDR="$1.$i"
     OUTPUT=$(ping -c 1 $IPADDR)
     FOUND=$(echo $OUTPUT | grep -i "bytes from")
     
