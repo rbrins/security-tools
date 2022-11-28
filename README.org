@@ -16,5 +16,8 @@ Custom tooling and automations to aid in pentesting & red teaming engagements. S
 * Passwords, Hashes, and Cracking
 - [[file:./auto-hash.sh][auto-hash.sh]] - A simple wrapper around hashid and hashcat to automatically detect the hashid and start bruteforcing with rockyou, probably should add a one rule flag
 
+* Searching
+- [[file:./extract-file-from-log.sh][extract-file-from-log.sh]] - A simple log parsers that will pull out files by specified file types
+
 * Licensing
 - Any custom code solely by me is GPL v3 or later
