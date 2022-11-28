@@ -17,6 +17,9 @@ do
 
     if [ ! -z $FOUND ]
     then
-	echo "$line"
+	echo "$FOUND" >> /tmp/extract-tmp.txt
     fi
 done
+
+# Make this tmp file a variable with default tmp
+sort -u /tmp/extract-tmp.txt
