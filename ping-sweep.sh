@@ -11,7 +11,7 @@ do
     OUTPUT=$(ping -c 1 $IPADDR)
     FOUND=$(echo $OUTPUT | grep -i "bytes from")
     
-    if [ ! -z $FOUND ]
+    if [ ! -z "$FOUND" ]
     then
 	echo "$IPADDR"
     fi
