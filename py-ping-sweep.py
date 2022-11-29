@@ -20,9 +20,9 @@ tmp_firstOctet = args.firstOctet.split(".")
 
 if (len(tmp_firstOctet) != 3):
     exit(1)
+s_firstOctet = tmp_firstOctet
 
-for num in range(0,2): 
-    tmp_firstOctet[num]
+# still should check the firstOctet if in the range of 1-255
 
 if (args.ending < args.starting):
     print("Ending IP Address must be higher than starting")
