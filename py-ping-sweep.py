@@ -20,7 +20,7 @@ tmp_firstOctet = args.firstOctet.split(".")
 
 if (len(tmp_firstOctet) != 3):
     exit(1)
-s_firstOctet = tmp_firstOctet
+s_firstOctet = args.firstOctet
 
 # still should check the firstOctet if in the range of 1-255
 
