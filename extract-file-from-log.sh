@@ -20,10 +20,10 @@ do
 
     if [ ! -z "$FOUND" ]
     then
-	echo "$FOUND" >> $TMPFILELOC
+	echo "$FOUND" >> "$TMPFILELOC"
     fi
 done
 
 # Make this tmp file a variable with default tmp
-sort -u $TMPFILELOC
-rm $TMPFILELOC
+sort -u "$TMPFILELOC"
+rm "$TMPFILELOC"
