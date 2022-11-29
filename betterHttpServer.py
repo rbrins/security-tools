@@ -1,5 +1,7 @@
 #!/bin/python
 
+# This program is released under the terms of the GNU GPL version 3 or any later version.
+
 import http.server
 import socketserver
 import argparse
