@@ -36,7 +36,7 @@ pingCmd_front = "ping -c 1 "
 pingCmd_end = " >/dev/null"
 
 for i in range(s_starting, s_ending):
-    host = s_firstOctet + "." + i
+    host = s_firstOctet + "." + str(i)
     pingCmd = pingCmd_front + host + pingCmd_end
     response = os.system(pingCmd)
     if (response == 0):
