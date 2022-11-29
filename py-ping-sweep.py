@@ -18,7 +18,7 @@ args = parser.parse_args()
 # Sanitize inputs
 tmp_firstOctet = args.firstOctet.split(".")
 
-if (len(tmp_firstOctet) != 3:
+if (len(tmp_firstOctet) != 3):
     exit(1)
 
 for num in range(0,2): 
