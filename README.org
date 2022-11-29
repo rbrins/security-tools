@@ -14,6 +14,9 @@ Custom tooling and automations to aid in pentesting & red teaming engagements. S
 * Tool Creation
 - [[file:./debugger-wrappers.py][debugger-wrappers.py]] - Import this python script into your python module to provide two functions for helping you debug, especially if you are terminal only and don't have an ide around
 
+* Sending & Copying Files
+- [[file:./betterHttpServer.py][betterHttpServer.py]] - A new do_GET implementation on the http.server python module used to transfer files and set up quick servers. This one defaults to displaying user-agent strings but can be flagged to display all headers or a specific other header. Note, this does not have encryption and should only be used in ways that will not jeopardize sensitive data on the wire (like encrypting a file before hosting it or sending reverse shell that has https as the communication channel).
+
 * Passwords, Hashes, and Cracking
 - [[file:./auto-hash.sh][auto-hash.sh]] - A simple wrapper around hashid and hashcat to automatically detect the hashid and start bruteforcing with rockyou, probably should add a one rule flag
 
