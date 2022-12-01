@@ -38,6 +38,7 @@ if (allHeaderFlag != True):
 else:
     Handler = AllHeadersHandler
 
+print("Serving HTTP on 0.0.0.0 port {}...".format(port))
 httpd = socketserver.TCPServer(("", port), Handler)
 
 httpd.serve_forever()
