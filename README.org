@@ -24,5 +24,9 @@ Custom tooling and automations to aid in pentesting & red teaming engagements. S
 * Searching
 - [[file:./extract-file-from-log.sh][extract-file-from-log.sh]] - A simple log parsers that will pull out files by specified file types
 
+* Reporting & Scoping
+- [[file:./scope-dns-check.py][scope-dns-check.py]] - Python module to aid in confirming dns resolves to known in-scope IP addresses. Use to loop through given domain names and given IP addresses, matching returned True values, and further clarifying domain names / ip address combos that have no match. 
+
+
 * Licensing
 - All code listed in this repository is released under the GNU GPL version 3 or any later version, unless otherwise explicitly stated
