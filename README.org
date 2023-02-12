@@ -7,26 +7,28 @@
 Custom tooling and automations to aid in pentesting & red teaming engagements. Some are built for ctfs and cert exames but will stay here for reference.
 
 * Networking Scanning
-- [[file:./quick-discovery.sh][quick-discovery.sh]] - A simple wrapper around nmap and arp to quick report and scan up host, better tools exist for most purposes, this is just simple a simple light start to a pentest not worried about detection
-- [[file:./ping-sweep.sh][ping-sweep.sh]] - Just a simple wrapper around ping on linux for a ctf
-- [[file:./py-ping-sweep.py][py-ping-sweep.py]] - Another simple wrapper around ping, using python, with some input sanitization for a ctf
+- [[file:./quick-discovery.sh][quick-discovery.sh]] - A simple wrapper around nmap and arp to quick report and scan up host, better tools exist for most purposes, this is just simple a simple light start to a pentest not worried about detection.
+- [[file:./ping-sweep.sh][ping-sweep.sh]] - Just a simple wrapper around ping on linux for a ctf.
+- [[file:./py-ping-sweep.py][py-ping-sweep.py]] - Another simple wrapper around ping, using python, with some input sanitization for a ctf.
 
 * Tool Creation
-- [[file:./debugger-wrappers.py][debugger-wrappers.py]] - Import this python script into your python module to provide two functions for helping you debug, especially if you are terminal only and don't have an ide around
+- [[file:./debugger-wrappers.py][debugger-wrappers.py]] - Import this python script into your python module to provide two functions for helping you debug, especially if you are terminal only and don't have an ide around.
 
 * Sending & Copying Files
 - [[file:./betterHttpServer.py][betterHttpServer.py]] - A new do_GET implementation on the http.server python module used to transfer files and set up quick servers. This one defaults to displaying user-agent strings but can be flagged to display all headers or a specific other header. Note, this does not have encryption and should only be used in ways that will not jeopardize sensitive data on the wire (like encrypting a file before hosting it or sending reverse shell that has https as the communication channel).
 - [[https://github.com/rbrins/dock-worker][dock-worker]] - A novel exfiltration tool over docker repositories.
 
 * Passwords, Hashes, and Cracking
-- [[file:./auto-hash.sh][auto-hash.sh]] - A simple wrapper around hashid and hashcat to automatically detect the hashid and start bruteforcing with rockyou, probably should add a one rule flag
+- [[file:./auto-hash.sh][auto-hash.sh]] - A simple wrapper around hashid and hashcat to automatically detect the hashid and start bruteforcing with rockyou, probably should add a one rule flag.
 
 * Searching
-- [[file:./extract-file-from-log.sh][extract-file-from-log.sh]] - A simple log parsers that will pull out files by specified file types
+- [[file:./extract-file-from-log.sh][extract-file-from-log.sh]] - A simple log parsers that will pull out files by specified file types.
 
 * Reporting & Scoping
 - [[file:./scope-dns-check.py][scope-dns-check.py]] - Python module to aid in confirming dns resolves to known in-scope IP addresses. Use to loop through given domain names and given IP addresses, matching returned True values, and further clarifying domain names / ip address combos that have no match. 
 
+* Table Tops & Presentations
+- [[file:./incidence-nonresponse-the-game.html][Incident Nonresponse - The Game]] - A game that showcases the chaos between disconnected security teams, the initial attack, and the rest of the organization frantically trying to get their products back into customer hands.
 
 * Licensing
-- All code listed in this repository is released under the GNU GPL version 3 or any later version, unless otherwise explicitly stated
+- All code listed in this repository is released under the GNU GPL version 3 or any later version, unless otherwise explicitly stated.

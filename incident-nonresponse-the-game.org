@@ -1,0 +1,19 @@
+#+TITLE: Incident Nonresponse - The Game
+#+AUTHOR: Russell Brinson
+#+DATE: 2023-01-08
+
+* Rules & Overview
+
+* Roles
+
+** CEO
+** VP of Operations
+** VP of Production
+** VP of Engineering
+** VP of IT
+** Security Manager
+** Security Engineer
+** Analyst
+** Team Lead
+** General Manager
+** Adversary

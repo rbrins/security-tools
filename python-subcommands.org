@@ -1,0 +1,155 @@
+#+TITLE: Figuring out Python Subcommands with ArgParse
+#+AUTHOR: Russell Brinson
+#+DATE: [2023-02-08 Wed]
+#+OPTIONS: toc:nil creation:t
+
+* Overview
+While watching [[https://www.twitch.tv/mttaggart][mttaggart]] from [[https://taggartinstitute.org/][The Taggart Institute]] stream is programming on KASM manager with python, he ran into a question that has haunted me before and if answer, would certainly help me with other projects. That question is roughly, how the heck does one tackle subcommands with the built-in library of argparse in python. Taggart eventually went with [[https://click.palletsprojects.com/en/8.1.x/][click]] as a package for "beautiful command line interfaces".
+
+Currently I have a python project I'd like to use the subcommand of "load" or "unload" with it that both have different arguments associated with it. This example, rant, and hopeful proof-of-concept will help in utilizing subcommands. Specifically, this is for adversary emulation within a devops environment that is confirmed to have the python docker sdk but no other non-standard module assumptions.
+
+
+
+* The Setup
+
+This is just utilizing the [[https://docs.python.org/dev/library/argparse.html][argparse module]], to create two global variable values.
+
+#+BEGIN_SRC python :export code :session yes :tangle python-subcommands.py
+from argparse import ArgumentParser
+
+parser = ArgumentParser()
+
+parser.add_argument('--global-thing', action = 'store_true')
+parser.add_argument('--global-value', default = 42)
+parser.add_argument('--registry', help="The location of the registry to login", default="docker.io")
+parser.add_argument('--repository', help="Where to push your image")
+parser.add_argument('--username')
+parser.add_argument('--password')
+parser.add_argument('--DockerClient', help="The docker socket to use that you have permissiosn for", default="unix:///var/run/docker.sock/")
+
+#+END_SRC
+
+#+RESULTS:
+_StoreAction(option_strings=['--DockerClient'], dest='DockerClient', nargs=None, const=None, default='unix:///var/run/docker.sock/', type=None, choices=None, required=False, help='The docker socket to use that you have permissiosn for', metavar=None)
+
+
+* Subparsers, subcommands, and their subarguments
+
+Next we want to start the subparsers pointing to the =subcommand=, note that this is what python will use when describing if you print the object, I also use the =title= parameter so that it shows up in ~-h~. We do this with the =parser= above and running the =add_subparsers= method on it. Then we can continue by adding arguments to the subparsers, like we did with the global arguments.
+
+#+BEGIN_SRC python :results raw :export code :session yes :tangle python-subcommands.py
+subcommand_parser = parser.add_subparsers(dest='subcommand', title="subcommand", help="additonal subcommand help here")
+
+load_parser = subcommand_parser.add_parser('load')
+unload_parser = subcommand_parser.add_parser('unload')
+#+END_SRC
+
+#+RESULTS:
+
+Next is adding arguments specific to our subcommands with the =add_argument= method of the specific subcommand. We can see that unload doesn't have any additional arguments and load has two additional arguments.
+
+#+BEGIN_SRC python :export code :session yes :tangle python-subcommands.py
+
+# Load First
+load_parser.add_argument('--dataLoc', help="Provide the file location of the data to load into the container")
+load_parser.add_argument('--dockerFile', help="Specify a specific dockerfile location. Warning! this assumes you load the data into the container manually with the dockerfile")
+
+# Unload doesn't have additonal arguments, just executes different functions
+
+#+END_SRC
+
+#+RESULTS:
+: _StoreAction(option_strings=['--dockerFile'], dest='dockerFile', nargs=None, const=None, default=None, type=None, choices=None, required=False, help='Specify a specific dockerfile location. Warning! this assumes you load the data into the container manually with the dockerfile', metavar=None)
+
+
+* Conclusion
+- I'm definitely more comfortable with subcommands now and pretty much finished my initial use case in this post. 
+- If you wanted to add further subcommands, it would be as simple as adding another =add_subparsers= to the =subcommand_parser= object. 
+
+** Results from parsing arguments
+#+BEGIN_SRC python :results raw  :export code :session yes :tangle python-subcommands.py
+print("The default --help results")
+print(parser.parse_args(['--help']))
+print("\n\n\n---\n\n\n")
+print("The default load --help results")
+print(parser.parse_args(['load', '--help']))
+
+
+#+END_SRC
+
+#+RESULTS:
+The default --help results
+
+#+BEGIN_SRC
+The default --help results
+usage:  [-h] [--global-thing] [--global-value GLOBAL_VALUE]
+        [--registry REGISTRY] [--repository REPOSITORY] [--username USERNAME]
+        [--password PASSWORD] [--DockerClient DOCKERCLIENT]
+        {load,unload} ...
+
+options:
+  -h, --help            show this help message and exit
+  --global-thing
+  --global-value GLOBAL_VALUE
+  --registry REGISTRY   The location of the registry to login
+  --repository REPOSITORY
+                        Where to push your image
+  --username USERNAME
+  --password PASSWORD
+  --DockerClient DOCKERCLIENT
+                        The docker socket to use that you have permissiosn for
+
+subcommand:
+  {load,unload}         additonal subcommand help here
+
+
+---
+
+
+
+The default load --help results
+usage:  load [-h] [--dataLoc DATALOC] [--dockerFile DOCKERFILE]
+
+options:
+  -h, --help            show this help message and exit
+  --dataLoc DATALOC     Provide the file location of the data to load into the
+                        container
+  --dockerFile DOCKERFILE
+                        Specify a specific dockerfile location. Warning! this
+                        assumes you load the data into the container manually
+                        with the dockerfile
+
+#+END_SRC
+
+** Tangled code
+
+#+BEGIN_SRC python :export code
+from argparse import ArgumentParser
+
+parser = ArgumentParser()
+
+parser.add_argument('--global-thing', action = 'store_true')
+parser.add_argument('--global-value', default = 42)
+parser.add_argument('--registry', help="The location of the registry to login", default="docker.io")
+parser.add_argument('--repository', help="Where to push your image")
+parser.add_argument('--username')
+parser.add_argument('--password')
+parser.add_argument('--DockerClient', help="The docker socket to use that you have permissiosn for", default="unix:///var/run/docker.sock/")
+
+subcommand_parser = parser.add_subparsers(dest='subcommand', title="subcommand", help="additonal subcommand help here")
+
+load_parser = subcommand_parser.add_parser('load')
+unload_parser = subcommand_parser.add_parser('unload')
+
+# Load First
+load_parser.add_argument('--dataLoc', help="Provide the file location of the data to load into the container")
+load_parser.add_argument('--dockerFile', help="Specify a specific dockerfile location. Warning! this assumes you load the data into the container manually with the dockerfile")
+
+# Unload doesn't have additonal arguments, just executes different functions
+
+print("The default --help results")
+print(parser.parse_args(['--help']))
+
+print("The default load --help results")
+print(parser.parse_args(['load', '--help']))
+#+END_SRC
