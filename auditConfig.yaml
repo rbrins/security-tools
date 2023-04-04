@@ -1,0 +1,14 @@
+---
+- testHost:
+    ipAddress: 127.0.0.1
+    exceptions:
+      - 21
+      - 22
+      - 80
+      - 443
+    interface: eth0
+
+- testHost2:
+    ipAddress: 127.0.0.2
+    exceptions:
+      - 8080
